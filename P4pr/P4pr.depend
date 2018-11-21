@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1542816920 source:c:\users\stark\documents\github\p4\p4pr\p4esqueleto.c
+	<stdio.h>
+	<string.h>
+
