@@ -26,7 +26,7 @@
 **********************************************************************/
 #include <stdio.h>
 #include <string.h>
-#INCLUDE "lectura_escritura_T.h"
+#include "lectura_escritura_T.h"
 
 
 /******     CONSTANTES    ******/
@@ -73,7 +73,7 @@ typedef struct {tNombre nombre;
                 tSenial senial;
                 }tCaptura;
 typedef struct {tCaptura captura;
-                int cupado;
+                int ocupado;
                 }tMiembroSeti;
 
 typedef tMiembroSeti tSeti [MAX_CAPTURAS];
@@ -152,9 +152,9 @@ void analizarCapturas(const tSeti capturas, const tSubcadenas secuencias);
 //void datosCaptura(void);
 //int menu(void);
 
+void datosCaptura(tSeti capturas);
 
-
-
+int menu(void);
 
 
 
@@ -241,9 +241,9 @@ int menu(void){
         for(b=0;b<MAX_CAPTURAS;b++){
             //printf("La captura es : %s\n",capturas[i].captura.senial.senial);
             //printf("La secuencia es: %s\n",secuencias[b]);
-            if(strstr(capturas[i].captura.senial.senial,secuencias[b]) != NULL) {
+            if(strstr(capturas[i].captura.senial,secuencias[b]) != NULL) {
                   printf("Captura prometedora.... :\n");
-                  printf("\n*********\n%s\n----------\n%s----------\n%s\n",capturas[i].captura.nombre.nombre,capturas[i].captura.fecha.fecha,capturas[i].captura.senial.senial);
+                  printf("\n*********\n%s\n----------\n%s----------\n%s\n",capturas[i].captura.nombre,capturas[i].captura.fecha,capturas[i].captura.senial);
 
             }
         }
@@ -261,12 +261,12 @@ void datosCaptura(tSeti capturas){
     int contador=0;
     int pos;
     for (i=0;i<MAX_CAPTURAS;i++){
-        if(strcmp(capturas[i].captura.nombre.nombre,telescopio)==0)
+        if(strcmp(capturas[i].captura.nombre,telescopio)==0)
             contador = contador +1;
             pos = i;
     }
     if(contador >=1){
-        printf("\n\n\n*********\n%s\n----------\n%s----------\n%s",telescopio,capturas[pos].captura.fecha.fecha,capturas[pos].captura.senial.senial);
+        printf("\n\n\n*********\n%s\n----------\n%s----------\n%s",telescopio,capturas[pos].captura.fecha,capturas[pos].captura.senial);
     }else{
         printf("No existen datos de ese radiotelescopio\n\n");
     }
@@ -297,7 +297,7 @@ void incluirCaptura (tSeti capturas){
     fflush(stdin);
 
     printf("Escriba el nombre del radiotelescopio\n");
-    scanf("%s",&nombre.nombre);
+    scanf("%s",&nombre);
     // printf("post nombre\n");
 
 
@@ -312,17 +312,17 @@ void incluirCaptura (tSeti capturas){
 
             fflush(stdin);
 
-            fgets(senial.senial,MAX_SENIAL, stdin);
+            fgets(senial,MAX_SENIAL, stdin);
 
-            strcpy(capturas[pos].captura.senial.senial,senial.senial);
+            strcpy(capturas[pos].captura.senial,senial);
 
             printf("Introduzca la fecha con formato dd-mm-aa:\n");
 
             fflush(stdin);
 
-            fgets(fecha.fecha,MAX_FECHA, stdin);
+            fgets(fecha,MAX_FECHA, stdin);
 
-            strcpy(capturas[pos].captura.fecha.fecha,fecha.fecha);
+            strcpy(capturas[pos].captura.fecha,fecha);
     }
     else if(existe == 1){
         printf("No hay capturas previas de este radiotelescopio.\n");
@@ -332,7 +332,7 @@ void incluirCaptura (tSeti capturas){
             // printf("El sitio es %d\n",sitio);
             // printf("El nombre es %s\n",nombre.nombre);
 
-            strcpy(capturas[sitio].captura.nombre.nombre,nombre.nombre);
+            strcpy(capturas[sitio].captura.nombre,nombre);
             // printf("El nombre guardado en la posicion %d de memoria es: %s\n",sitio,capturas[sitio].captura.nombre.nombre);
             capturas[sitio].ocupado = 1;
             // printf("Se ha puesto como ocupado la posicion %d, su valor es %d\n", sitio, capturas[sitio].ocupado);
@@ -341,17 +341,17 @@ void incluirCaptura (tSeti capturas){
 
             fflush(stdin);
 
-            fgets(senial.senial,MAX_SENIAL, stdin);
+            fgets(senial,MAX_SENIAL, stdin);
 
-            strcpy(capturas[sitio].captura.senial.senial,senial.senial);
+            strcpy(capturas[sitio].captura.senial,senial);
 
             printf("Introduzca la fecha con formato dd-mm-aa:\n");
 
             fflush(stdin);
 
-            fgets(fecha.fecha,MAX_FECHA, stdin);
+            fgets(fecha,MAX_FECHA, stdin);
 
-            strcpy(capturas[sitio].captura.fecha.fecha,fecha.fecha);
+            strcpy(capturas[sitio].captura.fecha,fecha);
 
             // printf("La senial de la captura en el sitio %d es %s , su fecha es:'%s'",sitio,  capturas[sitio].captura.senial.senial, capturas[sitio].captura.fecha.fecha);
 
@@ -391,7 +391,7 @@ int existeCaptura(const tSeti capturas, const tNombre nom, int *pos){
 
     for(i=0;i<MAX_CAPTURAS;i++){
 
-        if(strcmp(capturas[i].captura.nombre.nombre,nom.nombre)==0){
+        if(strcmp(capturas[i].captura.nombre,nom)==0){
         *pos = i;
            existe = existe + 1;
 

@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1545324176 source:d:\stark\desktop\practicasprogramacion\p4\lectura_escritura_t.c
+	"lectura_escritura_T.h"
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+
+1545324734 d:\stark\desktop\practicasprogramacion\p4\lectura_escritura_t.h
+	<stdio.h>
+

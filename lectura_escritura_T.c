@@ -19,21 +19,26 @@ fclose (pf);
 }
 
 
-void leerFichero (const char nombreFich[], tTexto texto){
+int leerFichero (const char nombreFich[], tTexto texto){
 int i;
 FILE *pf;
-
- inicializarTexto(texto);
-
+tCadena linea;
+int okApertura;
+okApertura=1;
 pf=fopen (nombreFich,"r");
 if (pf != NULL){
 i=0;
+leerCadena (linea, MAXLONGITUD, pf);
 while ((i < MAXCADENAS) && (!feof(pf))) {
-leerCadena (texto[i], (unsigned int)MAXLONGITUD, pf);
+strcpy(texto[i], linea);
 i++;
+leerCadena (linea, MAXLONGITUD, pf);
 }
 fclose (pf);
 }
+else
+okApertura=0;
+return okApertura; // devuelve 1 si no hay error en la apertura
 }
 
 

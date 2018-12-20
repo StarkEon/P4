@@ -1,7 +1,7 @@
 #ifndef _LECTURA_ESCRITURA_T_H
-#define _LECTURA_ESCRITURA_T_H
+#define _LECTURA_ESCRITURA_
 
-
+#include <stdio.h>
 #define MAXLONGITUD 30
 #define MAXCADENAS 10
 typedef char tCadena [MAXLONGITUD];
@@ -18,7 +18,7 @@ void escribirFichero (const char nombreFich[], tTexto texto);
 * Recibe como parámetros el nombre del fichero y la tabla de
 * cadenas de caracteres que almacenará el texto leído.
 */
-void leerFichero (const char nombreFich[], tTexto texto);
+int leerFichero (const char nombreFich[], tTexto texto);
 /**
 * Función auxiliar que lee un numCar de caracteres desde pf y
 * los almacena en cadena sin el caracter '\n'
